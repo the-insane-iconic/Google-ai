@@ -1,6 +1,9 @@
 {
-  "name": "Copy of Veo Studio",
-  "description": "Describe any scene and get a stunning video in seconds. An effortless video generator powered by Veo.",
-  "requestFramePermissions": [],
+  "name": "ShopSeeker AI",
+  "description": "Snap a photo of any item to find where it's sold in shops near you.",
+  "requestFramePermissions": [
+    "camera",
+    "geolocation"
+  ],
   "prompt": ""
 }

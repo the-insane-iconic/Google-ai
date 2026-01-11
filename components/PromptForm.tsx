@@ -1,3 +1,4 @@
+
 /**
  * @license
  * SPDX-License-Identifier: Apache-2.0
@@ -369,7 +370,8 @@ const PromptForm: React.FC<PromptFormProps> = ({
     [GenerationMode.EXTEND_VIDEO]: 'Describe what happens next (optional)...',
   }[generationMode];
 
-  const selectableModes = [
+  // Explicitly type selectableModes as GenerationMode[] to avoid 'unknown' errors in map
+  const selectableModes: GenerationMode[] = [
     GenerationMode.TEXT_TO_VIDEO,
     GenerationMode.FRAMES_TO_VIDEO,
     GenerationMode.REFERENCES_TO_VIDEO,

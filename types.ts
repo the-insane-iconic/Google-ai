@@ -1,14 +1,25 @@
+
 /**
  * @license
  * SPDX-License-Identifier: Apache-2.0
 */
-import {Video} from '@google/genai';
+import { Video } from '@google/genai';
 
-export enum AppState {
+export enum AppStatus {
   IDLE,
-  LOADING,
+  ANALYZING,
   SUCCESS,
   ERROR,
+}
+
+export enum AspectRatio {
+  LANDSCAPE = "16:9",
+  PORTRAIT = "9:16",
+}
+
+export enum Resolution {
+  P720 = "720p",
+  P1080 = "1080p",
 }
 
 export enum VeoModel {
@@ -16,21 +27,32 @@ export enum VeoModel {
   VEO = 'veo-3.1-generate-preview',
 }
 
-export enum AspectRatio {
-  LANDSCAPE = '16:9',
-  PORTRAIT = '9:16',
-}
-
-export enum Resolution {
-  P720 = '720p',
-  P1080 = '1080p',
-}
-
 export enum GenerationMode {
-  TEXT_TO_VIDEO = 'Text to Video',
-  FRAMES_TO_VIDEO = 'Frames to Video',
-  REFERENCES_TO_VIDEO = 'References to Video',
+  TEXT_TO_VIDEO = 'Text-to-Video',
+  FRAMES_TO_VIDEO = 'Frames-to-Video',
+  REFERENCES_TO_VIDEO = 'Reference-to-Video',
   EXTEND_VIDEO = 'Extend Video',
+}
+
+export interface MapGroundingChunk {
+  maps?: {
+    uri: string;
+    title: string;
+    placeAnswerSources?: {
+      reviewSnippets?: string[];
+    }[];
+  };
+}
+
+export interface ShopResult {
+  title: string;
+  uri: string;
+  snippet?: string;
+}
+
+export interface AnalysisResult {
+  description: string;
+  shops: ShopResult[];
 }
 
 export interface ImageFile {
@@ -49,11 +71,11 @@ export interface GenerateVideoParams {
   aspectRatio: AspectRatio;
   resolution: Resolution;
   mode: GenerationMode;
-  startFrame?: ImageFile | null;
-  endFrame?: ImageFile | null;
-  referenceImages?: ImageFile[];
-  styleImage?: ImageFile | null;
-  inputVideo?: VideoFile | null;
-  inputVideoObject?: Video | null;
-  isLooping?: boolean;
+  startFrame: ImageFile | null;
+  endFrame: ImageFile | null;
+  referenceImages: ImageFile[];
+  styleImage: ImageFile | null;
+  inputVideo: VideoFile | null;
+  inputVideoObject: Video | null;
+  isLooping: boolean;
 }
